@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
+import Calendar from './components/Calendar'
 
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
                 <main className="container mx-auto px-4 py-8">
                     <Routes>
                        <Route path="/" element={<Home />} />
+                       <Route path="/Calendar" element={<Calendar />} />
                     </Routes>
                 </main>
             </div>
