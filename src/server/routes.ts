@@ -5,9 +5,9 @@ import { getAllEvents, createEvent, updateEvent, deleteEvent } from './controlle
 const router = Router();
 
 // Routes endpoints
-router.get('/rutas_senderismo', getAllRoutes);
-router.get('/routes/:id', getRouteById);
-router.post('/routes', createRoute);
+router.get('/rutas', getAllRoutes);
+router.get('/rutas/:id', getRouteById);
+router.post('/rutas', createRoute);
 
 // Calendar events endpoints
 router.get('/events', getAllEvents);

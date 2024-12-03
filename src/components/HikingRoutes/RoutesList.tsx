@@ -45,28 +45,28 @@ const RoutesList = () => {
             <div className="mt-4 flex items-center gap-2 text-stone-500">
               <SignpostBig className="h-4 w-4" />
               <span className="text-sm">
-                Destinació:
+                Destinación:
                 <span className="font-medium">{route.destino}</span>
               </span>
             </div>
             <div className="mt-4 flex items-center gap-2 text-stone-500">
               <Route className="h-4 w-4" />
               <span className="text-sm">
-                Distància_km:
+                Distancia_km:
                 <span className="font-medium">{route.distancia_km}</span>
               </span>
             </div>
             <div className="mt-4 flex items-center gap-2 text-stone-500">
               <ChartNoAxesCombined className="h-4 w-4" />
               <span className="text-sm">
-                Desnivell_m:
+                Desnivel_m:
                 <span className="font-medium">{route.desnivel_m}</span>
               </span>
             </div>
             <div className="mt-4 flex items-center gap-2 text-stone-500">
               <MapPin className="h-4 w-4" />
               <span className="text-sm">
-                Dificultat:{" "}
+                Dificultad:{" "}
                 <span className="font-medium">{route.dificultad}</span>
               </span>
             </div>

@@ -1,9 +1,9 @@
 import { NavigationItem } from '../types/navigation';
 
 export const navigationItems: NavigationItem[] = [
-  { path: '/', label: 'Home' },
-  { path: '/hikingroutes', label: 'Rutes' },
-  { path: '/map', label: 'Map' },
-  { path: '/calendar', label: 'Calendar' },
-  { path: '/charts', label: 'Charts' },
+  { path: '/', label: 'Inicio' },
+  { path: '/hikingroutes', label: 'Rutas' },
+  { path: '/map', label: 'Mapa' },
+  { path: '/calendar', label: 'Calendario' },
+  { path: '/charts', label: 'Gráficos' },
 ];

@@ -5,10 +5,10 @@ const Home = () => {
     <div className="max-w-4xl mx-auto">
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold text-stone-800 mb-4">
-          Descobreix Noves Rutes de Senderisme
+          Descubre Nuevas Rutas de Senderismo
         </h1>
         <p className="text-lg text-stone-600">
-          Explora les millors rutes de Catalunya i planifica les teves aventures
+          Explora las mejores rutas de Cataluña y planea tus aventuras
         </p>
       </div>
 
@@ -18,10 +18,10 @@ const Home = () => {
             <MapPin className="h-10 w-10 text-emerald-600" />
           </div>
           <h2 className="text-xl font-semibold text-stone-800 mb-2 text-center">
-            Mapa Interactiu
+            Mapa Interactivo
           </h2>
           <p className="text-stone-600 text-center">
-            Explora totes les rutes disponibles en el nostre mapa interactiu
+            Explora todas las rutas disponibles en nuestro mapa interactivo
           </p>
         </div>
 
@@ -30,10 +30,10 @@ const Home = () => {
             <Calendar className="h-10 w-10 text-emerald-600" />
           </div>
           <h2 className="text-xl font-semibold text-stone-800 mb-2 text-center">
-            Calendari d'Events
+            Calendario de Eventos
           </h2>
           <p className="text-stone-600 text-center">
-            Planifica les teves excursions i no et perdis cap esdeveniment
+            Planifica tus excursiones y no te pierdas ningún evento
           </p>
         </div>
 
@@ -42,10 +42,10 @@ const Home = () => {
             <BarChart3 className="h-10 w-10 text-emerald-600" />
           </div>
           <h2 className="text-xl font-semibold text-stone-800 mb-2 text-center">
-            Estadístiques
+            Estadisticas
           </h2>
           <p className="text-stone-600 text-center">
-            Analitza les dades de les teves rutes i el teu progrés
+            Analiza los datos de tus rutas y tu progreso
           </p>
         </div>
       </div>
@@ -65,8 +65,8 @@ const Home = () => {
           Montserrat - Sant Jeroni
         </h3>
         <p className="text-stone-600">
-          Una de les rutes més emblemàtiques de Catalunya, amb vistes
-          espectaculars des del punt més alt de Montserrat.
+          Una de las rutas más emblemáticas de Cataluña, con vistas
+          espectaculares desde el punto más alto de Montserrat.
         </p>
       </div>
     </div>
