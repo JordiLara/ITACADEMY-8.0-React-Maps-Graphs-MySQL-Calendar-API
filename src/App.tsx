@@ -1,7 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
+import RoutesList from './components/HikingRoutes/index';
 import Calendar from './components/Calendar'
+
 
 
 function App() {
@@ -13,6 +15,7 @@ function App() {
                     <Routes>
                        <Route path="/" element={<Home />} />
                        <Route path="/Calendar" element={<Calendar />} />
+                       <Route path="/HikingRoutes" element={<RoutesList />} />
                     </Routes>
                 </main>
             </div>
