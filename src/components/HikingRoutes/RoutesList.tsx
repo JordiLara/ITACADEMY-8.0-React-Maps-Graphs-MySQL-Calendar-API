@@ -10,12 +10,14 @@ import {
 
 const CRUDView = ({ routes, onEdit, onDelete, onAdd }: any) => (
   <div className="p-4">
-    <button
-      className="mb-4 bg-emerald-600 text-white py-2 px-4 rounded-md"
-      onClick={onAdd}
-    >
-      Añadir Ruta
-    </button>
+    <div className="flex justify-end mb-4">
+      <button
+        className="bg-emerald-600 text-white py-2 px-4 rounded-md"
+        onClick={onAdd}
+      >
+        Añadir Ruta
+      </button>
+    </div>
     <table className="w-full border-collapse border border-gray-200">
       <thead>
         <tr>
@@ -40,7 +42,7 @@ const CRUDView = ({ routes, onEdit, onDelete, onAdd }: any) => (
             <td className="border border-gray-300 px-4 py-2">
               <button
                 className="bg-blue-500 text-white py-1 px-3 rounded-md mr-2"
-                onClick={() => onEdit(route.id)}
+                onClick={() => onEdit(route)}
               >
                 Editar
               </button>
@@ -97,12 +99,14 @@ const RoutesList = () => {
 
   return (
     <div className="p-4">
-      <button
-        className="mb-4 bg-emerald-600 text-white py-2 px-4 rounded-md"
-        onClick={handleToggleView}
-      >
-        {isCRUDView ? "Volver a Vista Detallada" : "Cambiar a Vista CRUD"}
-      </button>
+      <div className="flex justify-end mb-4">
+        <button
+          className="bg-emerald-600 text-white py-2 px-4 rounded-md"
+          onClick={handleToggleView}
+        >
+          {isCRUDView ? "Volver a Vista Detallada" : "Cambiar a Vista CRUD"}
+        </button>
+      </div>
 
       {isCRUDView ? (
         <CRUDView
