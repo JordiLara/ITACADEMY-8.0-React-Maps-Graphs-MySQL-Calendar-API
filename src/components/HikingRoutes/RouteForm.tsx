@@ -23,6 +23,11 @@ const RouteForm: React.FC<RouteFormProps> = ({
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
+
+    if (!formValues.dificultad) {
+      formValues.dificultad = "baja";
+    }
+    
     onSubmit(formValues);
   };
 
