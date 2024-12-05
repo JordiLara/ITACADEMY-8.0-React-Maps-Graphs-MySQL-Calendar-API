@@ -18,8 +18,8 @@ const CRUDView: React.FC<CRUDViewProps> = ({ routes, onEdit, onDelete, onAdd }) 
   };
 
   const handleSave = (values: Partial<Route>) => {
-    if (editingRoute) {
-      onEdit({...editingRoute, ...values } as Route);
+    if (editingRoute?.id) {
+      onEdit({ ...editingRoute, ...values } as Route);
     } else {
       onAdd(values as Omit<Route, "id">);
     }
