@@ -13,12 +13,9 @@ const Routes = () => {
           compartir con la comunidad.
         </p>
       </div>
-
-      <div className="grid md:grid-cols-3 gap-8">
-        <div className="md:col-span-2">
-          <RoutesList />
-        </div>
-        <div></div>
+      
+      <div className="w-full">
+        <RoutesList />
       </div>
     </div>
   );
