@@ -1,12 +1,12 @@
 export interface Route {
-  id?: number;
+  id: number;
   nombre: string;
   descripcion: string;
-  origen: [string, number];
-  destino: [string, number];
+  origen: string;
+  destino: string;
   distancia_km: number;
   desnivel_m: number;
-  dificultad: 'easy' | 'moderate' | 'hard';
+  dificultad: 'baja' | 'media' | 'alta';
   createdAt?: Date;
   updatedAt?: Date;
 }

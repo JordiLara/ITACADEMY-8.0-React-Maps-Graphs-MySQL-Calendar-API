@@ -1,40 +1,81 @@
-import React, { useState } from "react";
-import { useRoutes } from "../../hooks/useRoutes";
+import React, { useState, useEffect } from "react";
 import CRUDView from "./CRUDview";
+import { routesApi } from "../../api/routes";
 import {
+  Route as RouteIcon,
+  ChartNoAxesCombined,
   MapPin,
   AlertCircle,
   SignpostBig,
-  Route,
-  ChartNoAxesCombined,
-} from "lucide-react";
+} from "lucide-react"; 
+import { Route } from "../../types/route"; 
 
-const RoutesList = () => {
-  const { routes: initialRoutes, loading, error } = useRoutes();
+
+const RoutesList: React.FC = () => {
+  const [routes, setRoutes] = useState<Route[]>([]); 
   const [isCRUDView, setIsCRUDView] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null); 
 
-  const routes = initialRoutes.map((route) => ({
-    ...route,
-    distancia_km: route.distancia_km || "N/A",
-    desnivel_m: route.desnivel_m || "N/A",
-    dificultad: route.dificultad || "N/A",
-  }));
-
+  
+  useEffect(() => {
+    const fetchRoutes = async () => {
+      try {
+        const data = await routesApi.getAll();
+        setRoutes(data);
+      } catch (error: any) {
+        setError(error.message || 'Error desconocido');
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchRoutes();
+  }, []);
+        
   const handleToggleView = () => {
     setIsCRUDView(!isCRUDView);
   };
 
-  const handleAddRoute = () => {
-    alert("Añadir nueva ruta (funcionalidad pendiente)");
+  const handleAddRoute = async (newRoute: Omit<Route, "id">) => {
+    try {
+      const createdRoute = await routesApi.create(newRoute);
+      if (createdRoute) {
+        setRoutes((prevRoutes) => [...prevRoutes, createdRoute]);
+        alert('Nueva ruta añadida.');
+      }
+    } catch (error) {
+      console.error('Error al añadir una nueva ruta:', error);
+    }
+  };
+    
+  const handleEditRoute = async (updatedRoute: Route) => {
+    try {
+      const updated = await routesApi.update(updatedRoute.id, updatedRoute);
+      if (updated) {
+        setRoutes((prevRoutes) => 
+        prevRoutes.map((route) => 
+        route.id === updated.id ? updated : route
+      )
+    );
+    alert('Ruta actualizada con éxito.');
+      }
+    } catch (error) {
+      console.error('Error al editar la ruta:', error);
+    }
   };
 
-  const handleEditRoute = (id: string) => {
-    alert(`Editar ruta con ID: ${id}`);
+  const handleDeleteRoute = async (id: number) => {
+    try {
+      const success = await routesApi.delete(id);
+      if (success) {
+        setRoutes((prevRoutes) => prevRoutes.filter((route) => route.id !== id));
+        alert('Ruta eliminada con éxito')
+      }
+    } catch (error) {
+      console.error('Error al eliminar la ruta:', error);
+    }
   };
-
-  const handleDeleteRoute = (id: string) => {
-    alert(`Borrar ruta con ID: ${id}`);
-  };
+      
 
   if (loading) {
     return (
@@ -99,7 +140,7 @@ const RoutesList = () => {
                   </span>
                 </div>
                 <div className="mt-4 flex items-center gap-2 text-stone-500">
-                  <Route className="h-4 w-4" />
+                  <RouteIcon className="h-4 w-4" />
                   <span className="text-sm">
                     Distancia_km:{" "}
                     <span className="font-medium">{route.distancia_km}</span>

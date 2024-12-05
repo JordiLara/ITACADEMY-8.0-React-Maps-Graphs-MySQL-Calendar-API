@@ -1,4 +1,3 @@
-import React from 'react';
 
 const CRUDView = ({ routes, onEdit, onDelete, onAdd }: any) => (
   <div className="p-4">
