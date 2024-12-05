@@ -1,66 +1,81 @@
 
-const CRUDView = ({ routes, onEdit, onDelete, onAdd }: any) => (
-  <div className="p-4">
-    <div className="flex justify-end mb-4">
-      <button
-        className="bg-emerald-600 text-white py-2 px-4 rounded-md"
-        onClick={onAdd}
-      >
-        Añadir Ruta
-      </button>
-    </div>
-    <table className="w-full border-collapse border border-gray-200">
-      <thead>
-        <tr>
-          <th className="border border-gray-300 px-4 py-2">Nombre</th>
-          <th className="border border-gray-300 px-4 py-2">Descripción</th>
-          <th className="border border-gray-300 px-4 py-2">Origen</th>
-          <th className="border border-gray-300 px-4 py-2">Destino</th>
-          <th className="border border-gray-300 px-4 py-2">Distancia_km</th>
-          <th className="border border-gray-300 px-4 py-2">Desnivel_m</th>
-          <th className="border border-gray-300 px-4 py-2">Dificultad</th>
-          <th className="border border-gray-300 px-4 py-2">Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        {routes.map((route: any) => (
-          <tr key={route.id}>
-            <td className="border border-gray-300 px-4 py-2">{route.nombre}</td>
-            <td className="border border-gray-300 px-4 py-2">
-              {route.descripcion}
-            </td>
-            <td className="border border-gray-300 px-4 py-2">{route.origen}</td>
-            <td className="border border-gray-300 px-4 py-2">
-              {route.destino}
-            </td>
-            <td className="border border-gray-300 px-4 py-2">
-              {route.distancia_km || "N/A"}
-            </td>
-            <td className="border border-gray-300 px-4 py-2">
-              {route.desnivel_m || "N/A"}
-            </td>
-            <td className="border border-gray-300 px-4 py-2">
-              {route.dificultad || "N/A"}
-            </td>
-            <td className="border border-gray-300 px-4 py-2">
-              <button
-                className="bg-blue-500 text-white py-1 px-3 rounded-md mr-2"
-                onClick={() => onEdit(route)}
-              >
-                Editar
-              </button>
-              <button
-                className="bg-red-500 text-white py-1 px-3 rounded-md"
-                onClick={() => onDelete(route.id)}
-              >
-                Borrar
-              </button>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-);
+import React, { useState } from "react";
+import RouteForm from "./RouteForm";
+import { Route } from "../../types/route"
 
-export default CRUDView;
+interface CRUDViewProps {
+  routes: Route[];
+  onAdd: (route: Omit<Route, "id">) => void;
+  onEdit: (route: Route) => void;
+  onDelete: (id: number) => void;
+}
+
+const CRUDView: React.FC<CRUDViewProps> = ({ routes, onEdit, onDelete, onAdd }) => {
+  const [editingRoute, setEditingRoute] = useState<Route | null>(null);
+
+  const handleCancel = () => {
+    setEditingRoute(null);
+  };
+
+  const handleSave = (values: Partial<Route>) => {
+    if (editingRoute) {
+      onEdit({...editingRoute, ...values } as Route);
+    } else {
+      onAdd(values as Omit<Route, "id">);
+    }
+    setEditingRoute(null);
+  };
+
+  return (
+    <div className="p-4">
+      {editingRoute ? (
+        <RouteForm
+        initialValues={editingRoute || {}}
+        onSubmit={handleSave}
+        onCancel={handleCancel}
+        />
+
+      ) : (
+        <>
+          <button
+          className="mb-4 bg-emerald-600 text-white py-2 px-4 rounded-md"
+          onClick={() => setEditingRoute({} as Route )}
+          >
+            Añadir Ruta
+          </button>
+          <table className="w-full border-collapse border border-gray-200">
+            <thead>
+              <tr>
+                <th className="border border-gray-300 px-4 py-2">Nombre</th>
+                <th className="border border-gray-300 px-4 py-2">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {routes.map((route) => (
+                <tr key={route.id}>
+                  <td className="border border-gray-300 px-4 py-2">{route.nombre}</td>
+                  <td className="border border-gray-300 px-4 py-2">
+                    <button
+                      onClick={() => setEditingRoute(route)}
+                      className="bg-blue-500 text-white py-1 px-3 rounded-md mr-2"
+                    >
+                      Editar
+                    </button>
+                    <button
+                      onClick={() => onDelete(route.id)}
+                      className="bg-red-500 text-white py-1 px-3 rounded-md"
+                    >
+                      Borrar
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </>
+      )}
+    </div>
+  );
+};
+
+export default CRUDView;    
