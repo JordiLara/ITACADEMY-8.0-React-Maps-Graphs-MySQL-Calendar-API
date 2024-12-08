@@ -27,7 +27,7 @@ const RouteForm: React.FC<RouteFormProps> = ({
     if (!formValues.dificultad) {
       formValues.dificultad = "baja";
     }
-    
+
     onSubmit(formValues);
   };
 
@@ -76,6 +76,32 @@ const RouteForm: React.FC<RouteFormProps> = ({
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700">
+            Latitud de Origen
+          </label>
+          <input
+            type="number"
+            name="latitud_origen"
+            value={formValues.latitud_origen || ""}
+            onChange={handleChange}
+            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+            required
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700">
+            Longitud de Origen
+          </label>
+          <input
+            type="number"
+            name="longitud_origen"
+            value={formValues.longitud_origen || ""}
+            onChange={handleChange}
+            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+            required
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700">
             Destino
           </label>
           <input
@@ -86,6 +112,33 @@ const RouteForm: React.FC<RouteFormProps> = ({
             className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
             required
           />
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Latitud de Destino
+            </label>
+            <input
+              type="number"
+              name="latitud_destino"
+              value={formValues.latitud_destino || ""}
+              onChange={handleChange}
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Longitud de Destino
+            </label>
+            <input
+              type="number"
+              name="longitud_destino"
+              value={formValues.longitud_destino || ""}
+              onChange={handleChange}
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+              required
+            />
+          </div>
           <div>
             <label className="block text-sm font-medium text-gray-700">
               Distancia (km)

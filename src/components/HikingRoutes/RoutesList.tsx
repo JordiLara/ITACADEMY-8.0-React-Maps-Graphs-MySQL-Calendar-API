@@ -7,6 +7,7 @@ import {
   MapPin,
   AlertCircle,
   SignpostBig,
+  LocateFixed,
 } from "lucide-react"; 
 import { Route } from "../../types/route"; 
 
@@ -133,10 +134,38 @@ const RoutesList: React.FC = () => {
                   </span>
                 </div>
                 <div className="mt-4 flex items-center gap-2 text-stone-500">
+                  <LocateFixed className="h-4 w-4" />
+                  <span className="text-sm">
+                    Latitud de Origen:{" "}
+                    <span className="font-medium">{route.latitud_origen}</span>
+                  </span>
+                </div>
+                <div className="mt-4 flex items-center gap-2 text-stone-500">
+                  <LocateFixed className="h-4 w-4" />
+                  <span className="text-sm">
+                    Longitud de Origen:{" "}
+                    <span className="font-medium">{route.longitud_origen}</span>
+                  </span>
+                </div>
+                <div className="mt-4 flex items-center gap-2 text-stone-500">
                   <SignpostBig className="h-4 w-4" />
                   <span className="text-sm">
                     Destino:{" "}
                     <span className="font-medium">{route.destino}</span>
+                  </span>
+                </div>
+                <div className="mt-4 flex items-center gap-2 text-stone-500">
+                  <LocateFixed className="h-4 w-4" />
+                  <span className="text-sm">
+                    Latitud de Destino:{" "}
+                    <span className="font-medium">{route.latitud_destino}</span>
+                  </span>
+                </div>
+                <div className="mt-4 flex items-center gap-2 text-stone-500">
+                  <LocateFixed className="h-4 w-4" />
+                  <span className="text-sm">
+                    Longitud de Destino:{" "}
+                    <span className="font-medium">{route.longitud_destino}</span>
                   </span>
                 </div>
                 <div className="mt-4 flex items-center gap-2 text-stone-500">
