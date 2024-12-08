@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import RoutesList from './components/HikingRoutes/index';
+import Map from "./components/Map";
 import Calendar from './components/Calendar'
 
 
@@ -16,6 +17,7 @@ function App() {
                        <Route path="/" element={<Home />} />
                        <Route path="/Calendar" element={<Calendar />} />
                        <Route path="/HikingRoutes" element={<RoutesList />} />
+                       <Route path="/map" element={<Map />} />
                     </Routes>
                 </main>
             </div>
