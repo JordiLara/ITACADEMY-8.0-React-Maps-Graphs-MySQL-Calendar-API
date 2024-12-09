@@ -1,22 +1,18 @@
-import { useState } from 'react';
-import MapView from './MapView';
-import { ViewState, MAP_CONFIG } from "../../types/map";
+import React from "react";
+import { useRoutesContext } from "../../context/RoutesContext";
+import MapView from "./MapView";
 
-const MapContainer = () => {
-    const [viewState, setViewState] = useState<ViewState>({
-        longitude: MAP_CONFIG.defaultCenter.longitude,
-        latitude: MAP_CONFIG.defaultCenter.latitude,
-        zoom: MAP_CONFIG.defaultZoom,
-    });
+const MapContainer: React.FC = () => {
+  const { routes } = useRoutesContext();
 
-    return (
-        <div className='bg-white p-6 rounded-lg shadow-md'>
-            <h2 className='text-2xl font-bold text-stone-800 mb-'>Mapa de Rutes</h2>
-            <div className='h-[600px] rounded-lg overflow-hidden'>
-                <MapView viewState={viewState} onViewStateChange={setViewState} />
-            </div>
-        </div>
-    );
+  return (
+    <div className="bg-white p-6 rounded-lg shadow-md">
+      <h2 className="text-2xl font-bold text-stone-800 mb-4">Mapa de Rutas</h2>
+      <div className="h-[600px] rounded-lg overflow-hidden">
+        <MapView routes={routes} />
+      </div>
+    </div>
+  );
 };
 
 export default MapContainer;
