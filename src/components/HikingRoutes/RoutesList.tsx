@@ -8,31 +8,29 @@ import {
   AlertCircle,
   SignpostBig,
   LocateFixed,
-} from "lucide-react"; 
-import { Route } from "../../types/route"; 
-
+} from "lucide-react";
+import { Route } from "../../types/route";
 
 const RoutesList: React.FC = () => {
-  const [routes, setRoutes] = useState<Route[]>([]); 
+  const [routes, setRoutes] = useState<Route[]>([]);
   const [isCRUDView, setIsCRUDView] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null); 
+  const [error, setError] = useState<string | null>(null);
 
-  
   useEffect(() => {
     const fetchRoutes = async () => {
       try {
         const data = await routesApi.getAll();
         setRoutes(data);
       } catch (error: any) {
-        setError(error.message || 'Error desconocido');
+        setError(error.message || "Error desconocido");
       } finally {
         setLoading(false);
       }
     };
     fetchRoutes();
   }, []);
-        
+
   const handleToggleView = () => {
     setIsCRUDView(!isCRUDView);
   };
@@ -42,26 +40,24 @@ const RoutesList: React.FC = () => {
       const createdRoute = await routesApi.create(newRoute);
       if (createdRoute) {
         setRoutes((prevRoutes) => [...prevRoutes, createdRoute]);
-        alert('Nueva ruta añadida.');
+        alert("Nueva ruta añadida.");
       }
     } catch (error) {
-      console.error('Error al añadir una nueva ruta:', error);
+      console.error("Error al añadir una nueva ruta:", error);
     }
   };
-    
+
   const handleEditRoute = async (updatedRoute: Route) => {
     try {
       const updated = await routesApi.update(updatedRoute.id, updatedRoute);
       if (updated) {
-        setRoutes((prevRoutes) => 
-        prevRoutes.map((route) => 
-        route.id === updated.id ? updated : route
-      )
-    );
-    alert('Ruta actualizada con éxito.');
+        setRoutes((prevRoutes) =>
+          prevRoutes.map((route) => (route.id === updated.id ? updated : route))
+        );
+        alert("Ruta actualizada con éxito.");
       }
     } catch (error) {
-      console.error('Error al editar la ruta:', error);
+      console.error("Error al editar la ruta:", error);
     }
   };
 
@@ -69,14 +65,15 @@ const RoutesList: React.FC = () => {
     try {
       const success = await routesApi.delete(id);
       if (success) {
-        setRoutes((prevRoutes) => prevRoutes.filter((route) => route.id !== id));
-        alert('Ruta eliminada con éxito')
+        setRoutes((prevRoutes) =>
+          prevRoutes.filter((route) => route.id !== id)
+        );
+        alert("Ruta eliminada con éxito");
       }
     } catch (error) {
-      console.error('Error al eliminar la ruta:', error);
+      console.error("Error al eliminar la ruta:", error);
     }
   };
-      
 
   if (loading) {
     return (
@@ -165,7 +162,9 @@ const RoutesList: React.FC = () => {
                   <LocateFixed className="h-4 w-4" />
                   <span className="text-sm">
                     Longitud de Destino:{" "}
-                    <span className="font-medium">{route.longitud_destino}</span>
+                    <span className="font-medium">
+                      {route.longitud_destino}
+                    </span>
                   </span>
                 </div>
                 <div className="mt-4 flex items-center gap-2 text-stone-500">
