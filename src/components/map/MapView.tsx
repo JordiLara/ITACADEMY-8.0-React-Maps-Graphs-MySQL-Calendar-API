@@ -28,7 +28,7 @@ const MapView: React.FC<MapViewProps> = ({ routes }) => {
           anchor="bottom"
         >
           <div className="bg-red-500 text-white rounded-full px-2 py-1 text-xs shadow-md">
-            {route.nombre}
+            {route.origen}
           </div>
         </Marker>
       ))}
