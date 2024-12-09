@@ -1,15 +1,12 @@
 import { useState } from 'react';
 import MapView from './MapView';
-import { ViewState, MAP_CONFIG } from "../../types/map"
-
-
-
+import { ViewState, MAP_CONFIG } from "../../types/map";
 
 const MapContainer = () => {
     const [viewState, setViewState] = useState<ViewState>({
         longitude: MAP_CONFIG.defaultCenter.longitude,
         latitude: MAP_CONFIG.defaultCenter.latitude,
-        zoom: MAP_CONFIG.defaultZoom
+        zoom: MAP_CONFIG.defaultZoom,
     });
 
     return (

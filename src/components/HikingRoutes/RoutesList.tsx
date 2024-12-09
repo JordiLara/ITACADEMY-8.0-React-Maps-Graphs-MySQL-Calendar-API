@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
 import CRUDView from "./CRUDview";
-import { routesApi } from "../../api/routes";
 import {
   Route as RouteIcon,
   ChartNoAxesCombined,
@@ -9,70 +8,16 @@ import {
   SignpostBig,
   LocateFixed,
 } from "lucide-react";
-import { Route } from "../../types/route";
+import { useRoutesContext } from "../../context/RoutesContext";
+
 
 const RoutesList: React.FC = () => {
-  const [routes, setRoutes] = useState<Route[]>([]);
-  const [isCRUDView, setIsCRUDView] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchRoutes = async () => {
-      try {
-        const data = await routesApi.getAll();
-        setRoutes(data);
-      } catch (error: any) {
-        setError(error.message || "Error desconocido");
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchRoutes();
-  }, []);
+  const { routes, loading, error, addRoute, editRoute, deleteRoute } =
+    useRoutesContext();
+  const [isCRUDView, setIsCRUDView] = React.useState(false);
 
   const handleToggleView = () => {
     setIsCRUDView(!isCRUDView);
-  };
-
-  const handleAddRoute = async (newRoute: Omit<Route, "id">) => {
-    try {
-      const createdRoute = await routesApi.create(newRoute);
-      if (createdRoute) {
-        setRoutes((prevRoutes) => [...prevRoutes, createdRoute]);
-        alert("Nueva ruta añadida.");
-      }
-    } catch (error) {
-      console.error("Error al añadir una nueva ruta:", error);
-    }
-  };
-
-  const handleEditRoute = async (updatedRoute: Route) => {
-    try {
-      const updated = await routesApi.update(updatedRoute.id, updatedRoute);
-      if (updated) {
-        setRoutes((prevRoutes) =>
-          prevRoutes.map((route) => (route.id === updated.id ? updated : route))
-        );
-        alert("Ruta actualizada con éxito.");
-      }
-    } catch (error) {
-      console.error("Error al editar la ruta:", error);
-    }
-  };
-
-  const handleDeleteRoute = async (id: number) => {
-    try {
-      const success = await routesApi.delete(id);
-      if (success) {
-        setRoutes((prevRoutes) =>
-          prevRoutes.filter((route) => route.id !== id)
-        );
-        alert("Ruta eliminada con éxito");
-      }
-    } catch (error) {
-      console.error("Error al eliminar la ruta:", error);
-    }
   };
 
   if (loading) {
@@ -106,13 +51,13 @@ const RoutesList: React.FC = () => {
       {isCRUDView ? (
         <CRUDView
           routes={routes}
-          onAdd={handleAddRoute}
-          onEdit={handleEditRoute}
-          onDelete={handleDeleteRoute}
+          onAdd={addRoute}
+          onEdit={editRoute}
+          onDelete={deleteRoute}
         />
       ) : (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {routes.map((route) => (
+          {routes.map((route: { id: React.Key | null | undefined; nombre: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; descripcion: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; origen: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; latitud_origen: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; longitud_origen: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; destino: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; latitud_destino: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; longitud_destino: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; distancia_km: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; desnivel_m: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; dificultad: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; }) => (
             <div
               key={route.id}
               className="bg-white rounded-lg shadow-md overflow-hidden"
