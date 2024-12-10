@@ -4,6 +4,7 @@ import Home from "./components/Home";
 import RoutesList from "./components/HikingRoutes/index";
 import Map from "./components/Map";
 import Calendar from "./components/Calendar";
+import RouteCharts from "./components/Charts";
 import { RoutesProvider } from "./context/RoutesContext";
 
 const App: React.FC = () => {
@@ -18,6 +19,7 @@ const App: React.FC = () => {
               <Route path="/HikingRoutes" element={<RoutesList />} />
               <Route path="/Map" element={<Map />} />
               <Route path="/Calendar" element={<Calendar />} />
+              <Route path="/Charts" element={<RouteCharts />} />
             </Routes>
           </main>
         </div>
