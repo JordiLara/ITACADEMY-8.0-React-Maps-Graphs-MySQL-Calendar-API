@@ -34,6 +34,17 @@ const MapView: React.FC<MapViewProps> = ({ routes }) => {
       onMove={(evt) => setViewState(evt.viewState)}
       mapStyle={MAP_CONFIG.mapStyle}
       mapboxAccessToken={import.meta.env.VITE_MAPBOX_TOKEN}
+      onClick={() => {
+        if (popupInfo) {
+          setPopupInfo(null);
+          setViewState({
+            ...viewState,
+            longitude: MAP_CONFIG.defaultCenter.longitude,
+            latitude: MAP_CONFIG.defaultCenter.latitude,
+            zoom: MAP_CONFIG.defaultZoom,
+          });
+        }
+      }}
     >
       <NavigationControl position="top-right" />
 
@@ -46,6 +57,12 @@ const MapView: React.FC<MapViewProps> = ({ routes }) => {
           onClick={(e) => {
             e.originalEvent.stopPropagation();
             setPopupInfo(route);
+            setViewState({
+              ...viewState,
+              longitude: route.longitud_origen,
+              latitude: route.latitud_origen,
+              zoom: 12,
+            });
           }}
         />
       ))}
@@ -54,7 +71,15 @@ const MapView: React.FC<MapViewProps> = ({ routes }) => {
           longitude={popupInfo.longitud_origen}
           latitude={popupInfo.latitud_origen}
           anchor="top"
-          onClose={() => setPopupInfo(null)}
+          onClose={() => {
+            setPopupInfo(null);
+            setViewState({
+              ...viewState,
+              longitude: MAP_CONFIG.defaultCenter.longitude,
+              latitude: MAP_CONFIG.defaultCenter.latitude,
+              zoom: MAP_CONFIG.defaultZoom,
+            });
+          }}
         >
           <div className="p-2">
             <h3 className="font-bold">{popupInfo.origen}</h3>
