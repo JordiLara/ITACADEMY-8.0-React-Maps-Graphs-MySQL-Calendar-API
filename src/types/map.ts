@@ -18,7 +18,7 @@ export const MAP_CONFIG: MapConfig = {
         longitude: 1.7167,
         latitude: 41.7000
     },
-    defaultZoom: 8,
+    defaultZoom: 7,
     mapStyle: 'mapbox://styles/mapbox/outdoors-v12'
 };
 
