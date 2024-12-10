@@ -10,6 +10,7 @@ import {
   PointElement,
   LineElement,
   Title,
+  ChartOptions,
 } from "chart.js";
 import { useRoutesContext } from "../context/RoutesContext";
 
@@ -43,8 +44,7 @@ const RouteCharts: React.FC = () => {
       },
     ],
   };
-console.log("Dificultad - Datos del gráfico:", difficultyData);
-console.log("Rutas disponibles:", routes);
+
   const lineData = {
     labels: routes.map((route) => route.origen),
     datasets: [
@@ -53,16 +53,47 @@ console.log("Rutas disponibles:", routes);
         data: routes.map((route) => route.desnivel_m),
         borderColor: "#6366f1",
         borderWidth: 2,
-        full: false,
+        yAxisID: "y1",
       },
       {
         label: "Distancia (km)",
         data: routes.map((route) => route.distancia_km),
         borderColor: "#34d399",
         borderWidth: 2,
-        full: false,
+        yAxisID: "y2",
       },
     ],
+  };
+
+  const lineOptions: ChartOptions<"line"> = {
+    responsive: true,
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: "Origen de la Ruta",
+        },
+      },
+      y1: {
+        type: "linear",
+        position: "left",
+        title: {
+          display: true,
+          text: "Desnivel (m)",
+        },
+      },
+      y2: {
+        type: "linear",
+        position: "right",
+        grid: {
+          drawOnChartArea: false,
+        },
+        title: {
+          display: true,
+          text: "Distancia (km)",
+        },
+      },
+    },
   };
 
   return (
@@ -78,7 +109,7 @@ console.log("Rutas disponibles:", routes);
         <h3 className="text-xl font-bold text-stone-800 mb-4">
           Desnivel y Distancia de las Rutas
         </h3>
-        <Line data={lineData} />
+        <Line data={lineData} options={lineOptions} />
       </div>
     </div>
   );
