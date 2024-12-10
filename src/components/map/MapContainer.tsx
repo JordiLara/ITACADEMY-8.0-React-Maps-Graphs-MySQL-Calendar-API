@@ -8,7 +8,8 @@ const MapContainer: React.FC = () => {
 
   const filteredRoutes = difficultyFilter
     ? routes.filter(
-        (route) => route.dificultad.toLowerCase() === difficultyFilter
+        (route) =>
+          route.dificultad.toLowerCase() === difficultyFilter.toLowerCase()
       )
     : routes;
 
@@ -17,26 +18,40 @@ const MapContainer: React.FC = () => {
       <h2 className="text-2xl font-bold text-stone-800 mb-4">Mapa de Rutas</h2>
       <div className="flex gap-2 mb-4">
         <button
-          onClick={() => setDifficultyFilter("null")}
-          className="bg-gray-200 px-4 py-2 rounded-md"
+          onClick={() => setDifficultyFilter(null)}
+          className={`px-4 py-2 rounded-md ${
+            difficultyFilter === null ? "bg-blue-500 text-white" : "bg-gray-200"
+          }`}
         >
           Todas
         </button>
         <button
           onClick={() => setDifficultyFilter("baja")}
-          className="bg-green-500 text-white px-4 py-2 rounded-md"
+          className={`px-4 py-2 rounded-md ${
+            difficultyFilter === "baja"
+              ? "bg-green-500 text-white"
+              : "bg-gray-200"
+          }`}
         >
           Baja
         </button>
         <button
           onClick={() => setDifficultyFilter("media")}
-          className="bg-orange-500 text-white px-4 py-2 rounded-md"
+          className={`px-4 py-2 rounded-md ${
+            difficultyFilter === "media"
+              ? "bg-orange-500 text-white"
+              : "bg-gray-200"
+          }`}
         >
           Media
         </button>
         <button
           onClick={() => setDifficultyFilter("alta")}
-          className="bg-red-500  text-white px-4 py-2 rounded-md"
+          className={`px-4 py-2 rounded-md ${
+            difficultyFilter === "alta"
+              ? "bg-red-500 text-white"
+              : "bg-gray-200"
+          }`}
         >
           Alta
         </button>
