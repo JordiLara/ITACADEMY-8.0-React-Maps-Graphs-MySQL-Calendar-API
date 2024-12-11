@@ -35,7 +35,7 @@ export const EventsProvider: React.FC<{ children: React.ReactNode }> = ({
   const fetchEvents = useCallback(async () => {
     try {
       setLoading(true);
-      const response = await fetch("/api/eventos");
+      const response = await fetch("http://localhost:3001/eventos");
       const data = await response.json();
       setEvents(data);
       setError(null);
@@ -52,7 +52,7 @@ export const EventsProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const addEvent = async (newEvent: Omit<Event, "id">) => {
     try {
-      const response = await fetch("/api/eventos", {
+      const response = await fetch("http://localhost:3001/eventos", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newEvent),
@@ -70,7 +70,7 @@ export const EventsProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const updateEvent = async (id: number, updatedEvent: Partial<Event>) => {
     try {
-      const response = await fetch(`/api/eventos/${id}`, {
+      const response = await fetch(`http://localhost:3001/eventos/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedEvent),
@@ -90,7 +90,9 @@ export const EventsProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const deleteEvent = async (id: number) => {
     try {
-      const response = await fetch(`/api/eventos/${id}`, { method: "DELETE" });
+      const response = await fetch(`http://localhost:3001/eventos/${id}`, {
+        method: "DELETE",
+      });
       if (response.ok) {
         setEvents((prev) => prev.filter((event) => event.id !== id));
       } else {

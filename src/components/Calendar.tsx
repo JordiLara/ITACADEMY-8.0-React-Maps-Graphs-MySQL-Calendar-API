@@ -11,9 +11,11 @@ const Calendar: React.FC = () => {
   const { routes } = useRoutesContext();
   const [selectedEvent, setSelectedEvent] = useState<any>(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
 
-  const handleDateClick = (_info: { dateStr: string }) => {
+  const handleDateClick = (info: { dateStr: string }) => {
     setSelectedEvent(null);
+    setSelectedDate(info.dateStr);
     setModalOpen(true);
   };
 
@@ -22,11 +24,15 @@ const Calendar: React.FC = () => {
       (event) => event.id === Number(info.event.id)
     );
     setSelectedEvent(clickedEvent);
+    setSelectedDate(clickedEvent?.date || null);
     setModalOpen(true);
   };
 
   return (
-    <div>
+    <div className="bg-white p-6 rounded-lg shadow-md">
+      <h2 className="text-2xl font-bold text-stone-800 mb-4">
+        Calendario de Eventos
+      </h2>
       <FullCalendar
         plugins={[dayGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
@@ -40,12 +46,14 @@ const Calendar: React.FC = () => {
         })}
         dateClick={handleDateClick}
         eventClick={handleEventClick}
+        height="auto"
       />
       <EventModal
         open={modalOpen}
         onClose={() => setModalOpen(false)}
         event={selectedEvent}
         routes={routes}
+        date={selectedDate}
       />
     </div>
   );
