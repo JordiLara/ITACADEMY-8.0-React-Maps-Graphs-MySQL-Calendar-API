@@ -1,6 +1,6 @@
 export interface Event {
   id: number;
-  fecha: string; 
-  hora_salida: string; 
-  ruta_id: number; 
+  date: string; 
+  startTime: string; 
+  routeId: number; 
 }
