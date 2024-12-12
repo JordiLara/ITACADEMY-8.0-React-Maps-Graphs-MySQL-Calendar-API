@@ -11,6 +11,11 @@ This **Hiking Routes & Events Application** is a platform designed for hiking en
 The project integrates a user-friendly interface, an interactive calendar, and a map to enhance the experience for hiking lovers.
 
 ---
+
+
+https://github.com/user-attachments/assets/b10e3951-5f05-470b-9f1d-e3a7aadf5e9f
+
+
 ![Screenshoot-1](/public/HikingPaths_home.png)
 ![Screenshoot-2](/public/HikingPaths_rutas.png)
 ![Screenshoot-3](/public/HikingPaths_mapa.png)
