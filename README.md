@@ -69,21 +69,18 @@ https://github.com/user-attachments/assets/b10e3951-5f05-470b-9f1d-e3a7aadf5e9f
 ## 🔧 Installation and Setup
 Follow these steps to clone and run the application:
 
-### **1. Clone the Repository**
+### **1. Clone the Front-End and the Back-End Repository**
 ```bash
-# Replace <repository-url> with the actual repository link
 git clone <https://github.com/JordiLara/ITACADEMY-8.0-React-Maps-Graphs-MySQL-Calendar-API.git>
-cd <repository-folder>
+git clone <https://github.com/JordiLara/ITACADEMY-8.1-Backend-React-Maps-Graphs-MySQL-Calendar-API.git>
 ```
 
 ### **2. Install Dependencies**
 ```bash
-# Install server dependencies
-cd server
+# Install server (back-end) dependencies
 npm install
 
-# Install client dependencies
-cd ../client
+# Install client (front-end) dependencies
 npm install
 ```
 
@@ -93,26 +90,25 @@ Create `.env` files for both the client and server with the required API keys (e
 ### **4. Run the Application**
 ```bash
 # Start the server
-cd server
-npm start
+npm run start
 
 # Start the client
-cd ../client
-npm start
+npm run dev
 ```
 
 ### **5. Access the Application**
-Open your browser and navigate to:
-```
-http://localhost:3000
-```
 
+```
+Open the link given when you run the client. (your local host, usually)
+```
 ---
 
 ## 🔍 Roadmap
 
 Future enhancements might include:
 - User authentication to save personal preferences and events.
+- Better design to better user experience.
+- Add images.
 - Export calendar events to external tools like Google Calendar.
 - Add route ratings and reviews.
 - Multi-language support.
