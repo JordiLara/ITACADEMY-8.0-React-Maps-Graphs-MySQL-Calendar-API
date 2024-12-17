@@ -4,7 +4,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { useEventsContext } from "../context/EventContext";
 import { useRoutesContext } from "../context/RoutesContext";
-import EventModal from "./eventCalendar/eventModal";
+import EventModal from "./eventCalendar/EventModal";
 
 const Calendar: React.FC = () => {
   const { events } = useEventsContext();
