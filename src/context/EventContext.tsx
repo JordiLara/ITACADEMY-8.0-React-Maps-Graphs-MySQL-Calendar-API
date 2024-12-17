@@ -23,6 +23,9 @@ interface EventsContextProps {
   deleteEvent: (id: number) => Promise<void>;
 }
 
+const EVENTS_API_URL =
+  process.env.REACT_APP_EVENTS_API_URL || "http://localhost:3001/eventos";
+
 const EventsContext = createContext<EventsContextProps | undefined>(undefined);
 
 export const EventsProvider: React.FC<{ children: React.ReactNode }> = ({
@@ -35,7 +38,7 @@ export const EventsProvider: React.FC<{ children: React.ReactNode }> = ({
   const fetchEvents = useCallback(async () => {
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:3001/eventos");
+      const response = await fetch(EVENTS_API_URL);
       const data = await response.json();
       setEvents(data);
       setError(null);
@@ -52,7 +55,7 @@ export const EventsProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const addEvent = async (newEvent: Omit<Event, "id">) => {
     try {
-      const response = await fetch("http://localhost:3001/eventos", {
+      const response = await fetch(EVENTS_API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newEvent),
@@ -70,7 +73,7 @@ export const EventsProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const updateEvent = async (id: number, updatedEvent: Partial<Event>) => {
     try {
-      const response = await fetch(`http://localhost:3001/eventos/${id}`, {
+      const response = await fetch(`${EVENTS_API_URL}/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedEvent),
@@ -90,7 +93,7 @@ export const EventsProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const deleteEvent = async (id: number) => {
     try {
-      const response = await fetch(`http://localhost:3001/eventos/${id}`, {
+      const response = await fetch(`${EVENTS_API_URL}/${id}`, {
         method: "DELETE",
       });
       if (response.ok) {
